@@ -81,19 +81,28 @@ If your application is running, and you need to manually restart your server, yo
 
 **Table of Contents**
 
-* [Customization](#customization)
-  * [Extending Babel Config](#extending-babel-config)
-  * [Extending Webpack](#extending-webpack)
-  * [Environment Variables](#environment-variables)
-  * [Adding Temporary Environment Variables In Your Shell](#adding-temporary-environment-variables-in-your-shell)
-    * [Windows (cmd.exe)](#windows-cmdexe)
-    * [Linux, macOS (Bash)](#linux-macos-bash)
-  * [Adding Environment Variables In `.env`](#adding-environment-variables-in-env)
-    * [What other `.env` files are can be used?](#what-other-env-files-are-can-be-used)
-* [How Razzle works (the secret sauce)](#how-razzle-works-the-secret-sauce)
-* [Inspiration](#inspiration)
-  * [Author](#author)
-* [Contributors](#contributors)
+- [Quick Start](#quick-start)
+  - [`npm start` or `yarn start`](#npm-start-or-yarn-start)
+  - [`npm run build` or `yarn build`](#npm-run-build-or-yarn-build)
+  - [`npm run start:prod` or `yarn start:prod`](#npm-run-startprod-or-yarn-startprod)
+  - [`npm test` or `yarn test`](#npm-test-or-yarn-test)
+  - [`npm start -- --inspect` or `yarn start -- --inspect`](#npm-start------inspect-or-yarn-start------inspect)
+  - [`npm start -- --inspect-brk` or `yarn start -- --inspect-brk`](#npm-start------inspect-brk-or-yarn-start------inspect-brk)
+  - [`rs`](#rs)
+- [<img src="https://user-images.githubusercontent.com/4060187/37915268-209644d0-30e7-11e8-8ef7-086b529ede8c.png" width="500px" alt="Razzle Hot Restart"/>](#)
+- [Customization](#customization)
+  - [Customizing Babel Config](#customizing-babel-config)
+  - [Extending Webpack](#extending-webpack)
+  - [Environment Variables](#environment-variables)
+  - [Adding Temporary Environment Variables In Your Shell](#adding-temporary-environment-variables-in-your-shell)
+    - [Windows (cmd.exe)](#windows-cmdexe)
+    - [Linux, macOS (Bash)](#linux-macos-bash)
+  - [Adding Environment Variables In `.env`](#adding-environment-variables-in-env)
+    - [What other `.env` files are can be used?](#what-other-env-files-are-can-be-used)
+- [How Razzle works (the secret sauce)](#how-razzle-works-the-secret-sauce)
+- [Inspiration](#inspiration)
+    - [Author](#author)
+- [Contributors](#contributors)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -155,7 +164,7 @@ Last but not least, if you find yourself needing a more customized setup, Razzle
 * `process.env.REACT_BUNDLE_PATH`: Relative path to where React will be bundled during development. Unless you are modifying the output path of your webpack config, you can safely ignore this. This path is used by `react-error-overlay` and webpack to power up the fancy runtime error iframe. For example, if you are using common chunks and an extra entry to create a vendor bundle with stuff like react, react-dom, react-router, etc. called `vendor.js`, and you've changed webpack's output to `[name].js` in development, you'd want to set this environment variable to `/static/js/vendor.js`. If you do not make this change, nothing bad will happen, you will simply not get the cool error overlay when there are runtime errors. You'll just see them in the console. Note: This does not impact production bundling.
 * `process.env.VERBOSE`: default is false, setting this to true will not clear the console when you make edits in development (useful for debugging).
 * `process.env.PORT`: The `BUILD_TARGET=server` build listens on this port for all NODE_ENVs. default is `3000`
-* `process.env.HOST`: The IP address that the server will bind to. default is `0.0.0.0`, for INADDR_ANY
+* `process.env.HOST`: The IP address that the server will bind to. default is `localhost`, for INADDR_ANY
 * `process.env.NODE_ENV`: `'development'` or `'production'`
 * `process.env.BUILD_TARGET`: either `'client'` or `'server'`
 * `process.env.PUBLIC_PATH`: Only in used in `razzle build`. You can alter the `webpack.config.output.publicPath` of the client assets (bundle, css, and images). This is useful if you plan to serve your assets from a CDN. Make sure to _include_ a trailing slash (e.g. `PUBLIC_PATH=https://cdn.example.com/`). If you are using React and altering the public path, make sure to also [include the `crossorigin` attribute](https://reactjs.org/docs/installation.html#using-a-cdn) on your `<script>` tag in `src/server.js`.
